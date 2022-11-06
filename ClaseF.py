@@ -1,10 +1,9 @@
 class Reserva:
-    def __init__(self,tree,con):
-        self.tree=tree
-        self.con=con
+    def __init__(self, tree, con):
+        self.tree = tree
+        self.con = con
 
-
-    def f_boton_baja(self,tree,con):
+    def f_boton_baja(self, tree, con):
         # ****************************************************************
         # Funcion del boton Baja
         # ****************************************************************
@@ -16,5 +15,4 @@ class Reserva:
         cursor.execute(sql, data)
         con.commit()
 
-        inicializar_treview(tree,con)
-    
+        inicializar_treview(tree, con)
