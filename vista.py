@@ -62,6 +62,11 @@ def fecha_fin_seleccionada(*args):
 con = modelo.crear_base()
 
 modelo.crear_tabla(con)
+
+
+
+
+
 # *******************************************************************
 # VISTA VISTA VISTA VISTA VISTA VISTA VISTA VISTA VISTA VISTA VISTA *
 # *******************************************************************
