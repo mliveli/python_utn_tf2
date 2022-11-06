@@ -150,19 +150,7 @@ def f_boton_reservar(
     variable_autos.set("Vehiculos")
 
 
-# ****************************************************************
-# Funcion del boton Baja
-# ****************************************************************
-def f_boton_baja(tree,con):
-    global id_datos
-    cursor = con.cursor()
-    mi_id = int(id_datos)
-    data = (mi_id,)
-    sql = "DELETE FROM reservas WHERE id=?;"
-    cursor.execute(sql, data)
-    con.commit()
 
-    inicializar_treview(tree,con)
 
 
 # ****************************************************************
