@@ -2,7 +2,6 @@ from tkinter import messagebox
 from datetime import timedelta
 import datetime
 from datetime import date
-import sqlite3
 import re
 
 reserva = []
@@ -65,9 +64,9 @@ def test_disponibilidad(variable_autos, fecha_inicio, fecha_fin, con):
     variable_autos["value"] = lista_de_autos
 
 
-# ****************************************************************
+# ***************************************************************
 # Funcion del boton reservar
-# ****************************************************************
+# ***************************************************************
 def f_boton_reservar(
     tree,
     fecha_inicio,
@@ -150,19 +149,7 @@ def f_boton_reservar(
     variable_autos.set("Vehiculos")
 
 
-# ****************************************************************
-# Funcion del boton Baja
-# ****************************************************************
-def f_boton_baja(tree,con):
-    global id_datos
-    cursor = con.cursor()
-    mi_id = int(id_datos)
-    data = (mi_id,)
-    sql = "DELETE FROM reservas WHERE id=?;"
-    cursor.execute(sql, data)
-    con.commit()
 
-    inicializar_treview(tree,con)
 
 
 # ****************************************************************
@@ -220,40 +207,13 @@ def f_boton_salir(root):
         root.destroy()
 
 
-# ********************************************************************
-# funcion CREAR base de datos y tabla principal (unica en este caso) *
-# e inicializar treeview                                             *
-# ********************************************************************
-def crear_base():
-    con = sqlite3.connect("reservas.db")
-    print("Conectado")
-    return con
-
-
-def crear_tabla(con):
-    cursor = con.cursor()
-    sql = "CREATE TABLE IF NOT EXISTS reservas(\
-        id integer PRIMARY KEY,\
-        nombre VARCHAR(128),\
-        direccion VARCHAR(128),\
-        telefono VARCHAR(128),\
-        mail VARCHAR(128),\
-        vehiculo VARCHAR(128),\
-        inicio VARCHAR(128),\
-        fin VARCHAR(128))"
-    cursor.execute(sql)
-    con.commit()
 
 
 
 
 
-def inicializar_treview(tree,con):
-    for item in tree.get_children():
-        tree.delete(item)
-    cursor = con.execute("select id,vehiculo, inicio,fin from reservas")
-    for fila in cursor:
-        tree.insert("", "end", values=(fila[0], fila[1], fila[2], fila[3]))
+
+
 
 
 # ********************************************************************
