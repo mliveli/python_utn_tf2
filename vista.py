@@ -7,3 +7,4 @@ def ventana_principal(root):
 
     vp.b_salir_v(490, 565, 100, 25)
     vp.b_reservar_v(10, 565, 100, 25)
+    vp.b_baja_v(120, 565, 100, 25)

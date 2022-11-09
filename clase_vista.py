@@ -26,3 +26,7 @@ class VPrincipal(modelo.Modelo):
             command=lambda: self.b_reservar_f(),
         )
         boton_reservar.place(x=x, y=y, w=w, h=h)
+
+    def b_baja_v(self, x, y, w, h):
+        boton_baja = Button(self.root, text="Baja", command=lambda: self.b_baja_f())
+        boton_baja.place(x=x, y=y, w=w, h=h)

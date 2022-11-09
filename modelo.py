@@ -10,3 +10,7 @@ class Modelo:
     def b_reservar_f(self):
         """Funcion del boton reservar"""
         print("reservar")
+
+    def b_baja_f(self):
+        """Funcion del boton reservar"""
+        print("baja")
