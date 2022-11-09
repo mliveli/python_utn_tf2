@@ -5,5 +5,4 @@ def ventana_principal(root):
     vp = clase_vista.VPrincipal(root)
     vp.tam_y_tit("Alquiler de Autos - Reservas", "860x600")
 
-
-    vp.boton_salir_vista(490, 565, 100, 25)
+    vp.b_salir_v(490, 565, 100, 25)

@@ -10,11 +10,11 @@ class VPrincipal(modelo.Modelo):
         self.root.title(titulo)
         self.root.geometry(tam)
 
-    def boton_salir_vista(self, x, y, w, h):
+    def b_salir_v(self, x, y, w, h):
         """Crea boton Salir
         Parametros: 1 - Derecha Izquierda, 2 - Arriba Abajo, 3 - Ancho,
         4 - Altura"""
         from tkinter import Button
 
-        boton_salir = Button(self.root, text="Salir", command=lambda: self.b_salir())
+        boton_salir = Button(self.root, text="Salir", command=lambda: self.b_salir_f())
         boton_salir.place(x=x, y=y, w=w, h=h)

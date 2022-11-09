@@ -3,6 +3,6 @@ class Modelo:
         """Inicio"""
         pass
 
-    def b_salir(self):
+    def b_salir_f(self):
         """Funcion del boton salir"""
         print("Salir")
