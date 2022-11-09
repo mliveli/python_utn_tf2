@@ -8,11 +8,13 @@ from tkinter import W
 from tkcalendar import Calendar
 from tkcalendar import DateEntry
 import locale
-import modelo_part
+import modelo
 import datetime
 import os
 from datetime import date
 from datetime import timedelta
+import sqlite3
+
 from ClaseF import Reserva
 
 os.system("cls")
@@ -22,7 +24,7 @@ def fecha_inicio_seleccionada(*args):
     if len(fecha_inicio.get()) != 0:
         fecha_fin.delete(0, 8)
         fecha_fin.insert(0, fecha_inicio.get())
-        modelo_part.inicializar_calendario(cal, con)
+        modelo.inicializar_calendario(cal, con)
         boton_reservar.configure(state="normal")
 
         f = fecha_inicio.get().split("/")
@@ -37,7 +39,7 @@ def fecha_inicio_seleccionada(*args):
 
 
 def fecha_fin_seleccionada(*args):
-    variable_autos["value"] = modelo_part.lista_de_autos
+    variable_autos["value"] = modelo.lista_de_autos
     variable_autos.set("Vehiculos")
     if len(fecha_fin.get()) != 0:
         f = fecha_inicio.get().split("/")
@@ -55,16 +57,42 @@ def fecha_fin_seleccionada(*args):
             if not salto:
                 cal.calevent_create(day_inicio, "", tags="6")
                 cal.tag_config("6", background="blue")
-        if modelo_part.test_fechas(fecha_inicio, fecha_fin):
-            modelo_part.test_disponibilidad(
-                variable_autos, fecha_inicio, fecha_fin, con
-            )
+        if modelo.test_fechas(fecha_inicio, fecha_fin):
+            modelo.test_disponibilidad(variable_autos, fecha_inicio, fecha_fin, con)
             boton_reservar.configure(state="normal")
 
 
-con = modelo_part.crear_base()
+def crear_base():
+    # ********************************************************************
+    # funcion CREAR base de datos                                        *
+    # ********************************************************************
+    con = sqlite3.connect("reservas.db")
+    print("Conectado")
+    return con
 
-modelo_part.crear_tabla(con)
+
+def crear_tabla(con):
+    # ********************************************************************
+    # funcion CREAR tabla principal (unica en este caso)                 *
+    # e inicializar treeview                                             *
+    # ********************************************************************
+    cursor = con.cursor()
+    sql = "CREATE TABLE IF NOT EXISTS reservas(\
+        id integer PRIMARY KEY,\
+        nombre VARCHAR(128),\
+        direccion VARCHAR(128),\
+        telefono VARCHAR(128),\
+        mail VARCHAR(128),\
+        vehiculo VARCHAR(128),\
+        inicio VARCHAR(128),\
+        fin VARCHAR(128))"
+    cursor.execute(sql)
+    con.commit()
+
+
+con = crear_base()
+
+modelo.crear_tabla(con)
 
 
 # *******************************************************************
@@ -121,15 +149,15 @@ vsb.place(x=330 + 500 + 2, y=20, height=340)
 
 
 # ********* Inicializo la clase ****************
-reserva = Reserva(tree, con)
+res = Reserva(tree, con)
 
-Reserva.inicializar_treview()
+res.inicializar_treview()
 
 
 boton_reservar = Button(
     root,
     text="Reservar",
-    command=lambda: modelo_part.f_boton_reservar(
+    command=lambda: modelo.f_boton_reservar(
         tree,
         fecha_inicio,
         fecha_fin,
@@ -144,15 +172,13 @@ boton_reservar = Button(
 )
 boton_reservar.place(x=10, y=565, width=100, height=25)
 
-boton_baja = Button(
-    root, text="Baja", command=lambda: modelo_part.f_boton_baja(tree, con)
-)
+boton_baja = Button(root, text="Baja", command=lambda: modelo.f_boton_baja(tree, con))
 boton_baja.place(x=120, y=565, width=100, height=25)
 
 boton_modificar = Button(
     root,
     text="Modificar",
-    command=lambda: modelo_part.f_boton_modificar(
+    command=lambda: modelo.f_boton_modificar(
         tree,
         variable_autos,
         e_telefono,
@@ -166,13 +192,11 @@ boton_modificar = Button(
 )
 boton_modificar.place(x=230, y=565, width=100, height=25)
 
-boton_salir = Button(
-    root, text="Salir", command=lambda: modelo_part.f_boton_salir(root)
-)
+boton_salir = Button(root, text="Salir", command=lambda: modelo.f_boton_salir(root))
 boton_salir.place(x=490, y=565, width=100, height=25)
 
 
-variable_autos = ttk.Combobox(state="readonly", values=modelo_part.lista_de_autos)
+variable_autos = ttk.Combobox(state="readonly", values=modelo.lista_de_autos)
 variable_autos.place(x=30, y=250, height=30)
 variable_autos.current(0)
 
@@ -195,7 +219,7 @@ cal = Calendar(
 
 cal.place(x=30, y=55)
 
-modelo_part.inicializar_calendario(cal, con)
+modelo.inicializar_calendario(cal, con)
 
 
 # ****************************************************************
@@ -263,7 +287,7 @@ e_mail.place(x=120, y=490, width=710, height=25)
 
 tree.bind(
     "<Double-1>",
-    lambda evento, tree=tree, e_nombre=e_nombre, e_telefono=e_telefono, e_direccion=e_direccion, e_mail=e_mail, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, variable_autos=variable_autos, boton_reservar=boton_reservar: modelo_part.bind_accion(
+    lambda evento, tree=tree, e_nombre=e_nombre, e_telefono=e_telefono, e_direccion=e_direccion, e_mail=e_mail, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, variable_autos=variable_autos, boton_reservar=boton_reservar: modelo.bind_accion(
         tree,
         e_nombre,
         e_telefono,

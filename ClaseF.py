@@ -1,4 +1,4 @@
-import sqlite3
+# import sqlite3
 
 
 class Reserva:
@@ -6,6 +6,7 @@ class Reserva:
         self.tree = tree
         self.con = con
 
+    """
     def crear_base(self):
         # ********************************************************************
         # funcion CREAR base de datos                                        *
@@ -31,6 +32,7 @@ class Reserva:
             fin VARCHAR(128))"
         cursor.execute(sql)
         self.con.commit()
+    """
 
     def f_boton_baja(
         self,
@@ -48,7 +50,9 @@ class Reserva:
 
         self.inicializar_treview()
 
-    def inicializar_treview(self):
+    def inicializar_treview(
+        self,
+    ):
         # ****************************************************************
         # Inicializa el treeview cargando desde la base de datos
         # ****************************************************************
