@@ -1,12 +1,12 @@
 class Modelo:
-    def __init__(self) -> None:
+    def __init__(self):
         pass
 
-    def b_salir(self, root):
+    def b_salir(self):
         """Funcion del boton salir"""
         print("qqqq")
 
 
-def b_salir(root):
+def b_salir():
     """Funcion del boton salir"""
     print("qqqq")

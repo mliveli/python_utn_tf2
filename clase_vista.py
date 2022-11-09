@@ -17,6 +17,6 @@ class VPrincipal:
         objm = modelo.Modelo()
 
         boton_salir = Button(
-            self.root, text="Salir", command=lambda: objm.b_salir(self.root)
+            self.root, text="Salir", command=lambda: objm.b_salir()
         )
         boton_salir.place(x=x, y=y, w=w, h=h)
