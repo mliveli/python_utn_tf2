@@ -6,3 +6,7 @@ class Modelo:
     def b_salir_f(self):
         """Funcion del boton salir"""
         print("Salir")
+
+    def b_reservar_f(self):
+        """Funcion del boton reservar"""
+        print("reservar")

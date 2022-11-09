@@ -1,4 +1,5 @@
 import modelo
+from tkinter import Button
 
 
 class VPrincipal(modelo.Modelo):
@@ -14,7 +15,14 @@ class VPrincipal(modelo.Modelo):
         """Crea boton Salir
         Parametros: 1 - Derecha Izquierda, 2 - Arriba Abajo, 3 - Ancho,
         4 - Altura"""
-        from tkinter import Button
 
         boton_salir = Button(self.root, text="Salir", command=lambda: self.b_salir_f())
         boton_salir.place(x=x, y=y, w=w, h=h)
+
+    def b_reservar_v(self, x, y, w, h):
+        boton_reservar = Button(
+            self.root,
+            text="Reservar",
+            command=lambda: self.b_reservar_f(),
+        )
+        boton_reservar.place(x=x, y=y, w=w, h=h)
