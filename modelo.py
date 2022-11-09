@@ -3,10 +3,6 @@ class Modelo:
         """Inicio"""
         pass
 
-    def b_salir_f(self):
-        """Funcion del boton salir"""
-        print("Salir")
-
     def b_reservar_f(self):
         """Funcion del boton reservar"""
         print("reservar")
@@ -14,3 +10,11 @@ class Modelo:
     def b_baja_f(self):
         """Funcion del boton reservar"""
         print("baja")
+
+    def b_modificar_f(self):
+        """Funcion del boton reservar"""
+        print("modificar")
+
+    def b_salir_f(self):
+        """Funcion del boton salir"""
+        print("Salir")
